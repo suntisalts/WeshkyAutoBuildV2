@@ -1,3 +1,8 @@
+do
+	local MainPart = game:GetService("CoreGui"):FindFirstChild("MainPart")
+	if MainPart then MainPart:Destroy() end
+end
+
 local DiscordUi = Instance.new("ScreenGui")
 local Background = Instance.new("Frame")
 local Frame = Instance.new("Frame")
