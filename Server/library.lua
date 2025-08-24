@@ -1646,8 +1646,11 @@ local library library = {
                     self.value = sliderOptions.value
                     self.event = event.new()
                     self.eventBlock = false
-
+                    
                     local function round(x, n)
+                        if x == 0 then
+                            return "0"
+                        end
                         local a = tostring(x * 10^n)
                         return a:sub(1, -(n + 1)) .. "." .. a:sub(-n)
                     end
@@ -2297,7 +2300,6 @@ local library library = {
                             canType = true
                             showCursor = false
                             self.search("")
-                            displayText.Text = "Search ..."
                             updateTextDisplay()
                         end)
 
