@@ -77,6 +77,8 @@ function progressionBar.new()
         else
             progress.Text = tostring(text)
             progressBarFill.Size = UDim2.new(1, 0, 1, 0)
+        else
+            warn("ProgressBar: Update expects number or string, got " .. typeof(text))
         end
     end
     
