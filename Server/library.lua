@@ -2110,13 +2110,42 @@ local library library = {
                     end
 
                     do -- search bar
-                        local TextBox = dropdownWindow:FindFirstChild("Content"):FindFirstChild("Search"):FindFirstChild("Outer"):FindFirstChild("Inner"):FindFirstChild("TextBox")
-                        local inTextBox = false
+                        local searchFrame = dropdownWindow:FindFirstChild("Content"):FindFirstChild("Search")
+                        local outer = searchFrame:FindFirstChild("Outer")
+                        local inner = outer:FindFirstChild("Inner")
+                        local TextBox = inner:FindFirstChild("TextBox")
                         
-                        TextBox.MouseEnter:Connect(function()
+                        -- Create a proper TextBox for input
+                        local realTextBox = Instance.new("TextBox")
+                        realTextBox.Size = UDim2.new(1, -30, 1, 0)
+                        realTextBox.Position = UDim2.new(0, 30, 0, 0)
+                        realTextBox.BackgroundTransparency = 1
+                        realTextBox.TextColor3 = Color3.new(1, 1, 1)
+                        realTextBox.Text = ""
+                        realTextBox.PlaceholderText = "Search ..."
+                        realTextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
+                        realTextBox.ClearTextOnFocus = false
+                        realTextBox.TextXAlignment = Enum.TextXAlignment.Left
+                        realTextBox.Font = Enum.Font.SourceSans
+                        realTextBox.TextSize = 14
+                        realTextBox.Parent = inner
+                        
+                        -- Hide the original text label
+                        TextBox.Visible = false
+
+                        local inTextBox = false
+                        local searchIcon = Instance.new("ImageLabel")
+                        searchIcon.Size = UDim2.new(0, 16, 0, 16)
+                        searchIcon.Position = UDim2.new(0, 7, 0.5, -8)
+                        searchIcon.BackgroundTransparency = 1
+                        searchIcon.Image = "rbxassetid://11144378537" -- Search icon
+                        searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
+                        searchIcon.Parent = inner
+
+                        realTextBox.MouseEnter:Connect(function()
                             inTextBox = true
                         end)
-                        TextBox.MouseLeave:Connect(function()
+                        realTextBox.MouseLeave:Connect(function()
                             inTextBox = false
                         end)
 
@@ -2135,107 +2164,54 @@ local library library = {
                             updateCanvas()
                         end
 
-                        local lastTick = tick()
-                        local lastTickN = 1
-                        local text = ""
-                        local canSearch = false
-                        local shift = false
-                        local backspace = false
-                        
-                        local function updateTextBox()
-                            lastTick = tick()
-                            lastTickN = 1
-                            self.search(text)
-                        end
-
-                        mouse.InputBegan:Connect(function()
+                        -- Focus the textbox when clicked
+                        inner.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
-                                canSearch = inTextBox
-                            else
-                                canSearch = false
-                            end
-                            if canSearch then
-                                TextBox.TextColor3 = Color3.new(1, 1, 1)
-                                spawn(function()
-                                    while canSearch do
-                                        TextBox.Text = text .. (lastTickN == 1 and "|" or "")
-                                        if (tick() - lastTick) >= 0.5 then
-                                            lastTick = tick()
-                                            lastTickN = 1 - lastTickN
-                                        end
-                                        RunService.Heartbeat:Wait()
-                                    end
-                                    lastTickN = 0
-                                    TextBox.Text = text .. (lastTickN == 1 and "|" or "")
-                                    TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
-                                    if text == "" then
-                                        TextBox.Text = "Search ..."
-                                    end
-                                end)
+                                realTextBox:CaptureFocus()
                             end
                         end)
 
-                        UserInputService.InputBegan:Connect(function(inputObject)
-                            local keycode = inputObject.KeyCode
-                            
-                            if keycode == Enum.KeyCode.LeftShift then
-                                shift = true
-                            end
-                            
-                            if canSearch then
-                                -- Handle Enter key to confirm selection
-                                if keycode == Enum.KeyCode.Return or keycode == Enum.KeyCode.KeypadEnter then
-                                    canSearch = false
-                                    textBox.TextColor3 = Color3.fromRGB(178, 178, 178)
-                                    if text == "" then
-                                        TextBox.Text = "Search ..."
-                                    end
-                                    return
-                                end
-                                
-                                if keycode == Enum.KeyCode.Backspace then
-                                    backspace = true
-                                    text = text:sub(1, -2)
-                                    updateTextBox()
+                        -- Handle text changes
+                        realTextBox:GetPropertyChangedSignal("Text"):Connect(function()
+                            self.search(realTextBox.Text)
+                        end)
 
-                                    local backspaceTick = tick()
-                                    local backspaceN = 0.5
-                                    spawn(function()
-                                        while backspace do
-                                            if (tick() - backspaceTick) >= backspaceN then
-                                                backspaceN = 0.05
-                                                backspaceTick = tick()
-                                                text = text:sub(1, -2)
-                                                updateTextBox()
-                                            end
-                                            RunService.Heartbeat:Wait()
-                                        end
-                                        backspaceN = 0.5
-                                    end)
-                                elseif keycode == Enum.KeyCode.Space then
-                                    text = text .. " "
-                                    updateTextBox()
-                                end
-                                
-                                -- Handle alphanumeric input
-                                if betweenOpenInterval(keycode.Value, 48, 57) then -- 0-9
-                                    local name = rawget({ Zero = "0", One = "1", Two = "2", Three = "3", Four = "4", Five = "5", Six = "6", Seven = "7", Eight = "8", Nine = "9" }, keycode.Name)
-                                    text = text .. name
-                                    updateTextBox()
-                                elseif betweenOpenInterval(keycode.Value, 65, 90) then -- A-Z
-                                    local name = (not shift) and keycode.Name:lower() or keycode.Name
-                                    text = text .. name
-                                    updateTextBox()
-                                end
+                        -- Handle focus events
+                        realTextBox.Focused:Connect(function()
+                            realTextBox.PlaceholderText = ""
+                            searchIcon.ImageColor3 = Color3.new(1, 1, 1)
+                        end)
+
+                        realTextBox.FocusLost:Connect(function()
+                            if realTextBox.Text == "" then
+                                realTextBox.PlaceholderText = "Search ..."
+                                searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
                             end
                         end)
-                        
-                        UserInputService.InputEnded:Connect(function(inputObject)
-                            if inputObject.KeyCode == Enum.KeyCode.LeftShift then
-                                shift = false
-                            elseif inputObject.KeyCode == Enum.KeyCode.Backspace then
-                                backspace = false
-                            end
+
+                        -- Add clear button
+                        local clearButton = Instance.new("TextButton")
+                        clearButton.Size = UDim2.new(0, 20, 1, 0)
+                        clearButton.Position = UDim2.new(1, -20, 0, 0)
+                        clearButton.BackgroundTransparency = 1
+                        clearButton.Text = "X"
+                        clearButton.TextColor3 = Color3.fromRGB(178, 178, 178)
+                        clearButton.Font = Enum.Font.SourceSansBold
+                        clearButton.TextSize = 14
+                        clearButton.Parent = inner
+
+                        clearButton.MouseButton1Click:Connect(function()
+                            realTextBox.Text = ""
+                            self.search("")
+                            realTextBox:CaptureFocus()
+                        end)
+
+                        clearButton.MouseEnter:Connect(function()
+                            clearButton.TextColor3 = Color3.new(1, 1, 1)
+                        end)
+
+                        clearButton.MouseLeave:Connect(function()
+                            clearButton.TextColor3 = Color3.fromRGB(178, 178, 178)
                         end)
                     end
 
