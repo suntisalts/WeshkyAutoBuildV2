@@ -12,7 +12,7 @@ if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
 
-local tzu = Enum.Font.GothamSemibold 
+local tzu = Enum.Font.SourceSansBold 
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
