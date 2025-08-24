@@ -68,16 +68,20 @@ function progressionBar.new()
     
     function self:Update(value)
         if not screenGui or not screenGui.Parent then return end
-    
-        if typeof(value) == "number" then
-            local percentage = math.clamp(value, 0, 100)
-            percentageLabel.Text = string.format("%d%%", math.floor(percentage))
-            progressBar.Size = UDim2.new(percentage / 100, 0, 1, 0)
-        elseif typeof(value) == "string" then
-            percentageLabel.Text = value
-        else
-            warn("ProgressBar: Update expects number or string, got " .. typeof(value))
+        
+        -- ONLY accept numbers, never strings
+        if typeof(value) ~= "number" then
+            -- If it's a string, try to convert it to number, otherwise use 0
+            if typeof(value) == "string" then
+                value = tonumber(value) or 0
+            else
+                value = 0
+            end
         end
+        
+        local percentage = math.clamp(value, 0, 100)
+        percentageLabel.Text = string.format("%d%%", math.floor(percentage))
+        progressBar.Size = UDim2.new(percentage / 100, 0, 1, 0)
     end
     
     function self:SetTotalBlocks(count)
