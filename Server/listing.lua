@@ -146,21 +146,19 @@ BlockText.BackgroundTransparency = 1
 BlockText.RichText = true
 BlockText.ZIndex = 13
 
-local images = loadstring(game:HttpGet("https://raw.githubusercontent.com/Sybiux/Babft-Sten-Remade/refs/heads/main/Server/blockslist.lua"))()
+local images = loadstring(game:HttpGet("https://raw.githubusercontent.com/suntisalts/WeshkyAutoBuildV2/refs/heads/main/Server/blocklist.lua"))()
 
 local function Resize(part, newProps, speed)
     local tween = TweenInfo.new(speed or 0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
     TweenService:Create(part, tween, newProps):Play()
 end
 
--- Toggle keybind
 UserInputService.InputBegan:Connect(function(input, gpe)
     if input.KeyCode == Enum.KeyCode.RightShift then
         Window.Visible = not Window.Visible
     end
 end)
 
--- Collapse animation
 do
     local open_close = Toggle
     local open, canopen = true, true
@@ -195,7 +193,6 @@ do
     end)
 end
 
--- Logic
 local Functions = {}
 
 local COLORS = {
