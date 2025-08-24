@@ -41,7 +41,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     Window.Name = "Window"
     Window.Parent = ambientShadow
     Window.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
-    Window.BackgroundTransparency = 0.2
+    Window.BackgroundTransparency = 0.25
     Window.BorderSizePixel = 0
     Window.Position = UDim2.new(0, 5, 0, 5)
     Window.Size = UDim2.new(0, 230, 0, 80)
@@ -170,7 +170,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
             local function Unchecked()
                 pcall(function() all.Callback(false) end)
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                wait(0.2)
+                wait(0.1)
                 StillHere = false
                 for i, v in ipairs(ActiveNotifications) do
                     if v == ambientShadow then
@@ -184,7 +184,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
             local function Checked()
                 pcall(function() all.Callback(true) end)
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                wait(0.2)
+                wait(0.1)
                 StillHere = false
                 for i, v in ipairs(ActiveNotifications) do
                     if v == ambientShadow then
@@ -204,7 +204,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
 
             if StillHere then
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
-                wait(0.2)
+                wait(0.1)
                 for i, v in ipairs(ActiveNotifications) do
                     if v == ambientShadow then
                         table.remove(ActiveNotifications, i)
