@@ -1,3 +1,4 @@
+Code
 --[[
 	rbimgui-2
 	version 1.2
@@ -127,7 +128,7 @@ do -- Load items
     Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1.000
     Label.Size = UDim2.new(0, 91, 0, 15)
-    Label.Font = Enum.Font.Code
+    Label.Font = Enum.Font.SourceSansPro
     Label.Text = "Hello, World!"
     Label.TextColor3 = Color3.fromRGB(255, 255, 255)
     Label.TextSize = 14.000
@@ -138,7 +139,7 @@ do -- Load items
     TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabButton.BackgroundTransparency = 1.000
     TabButton.Size = UDim2.new(0, 32, 1, 0)
-    TabButton.Font = Enum.Font.Code
+    TabButton.Font = Enum.Font.SourceSansPro
     TabButton.Text = "Menu"
     TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     TabButton.TextSize = 16.000
@@ -176,7 +177,7 @@ do -- Load items
     Title.BackgroundTransparency = 1.000
     Title.Position = UDim2.new(0, 30, 0, 0)
     Title.Size = UDim2.new(1, -30, 1, 0)
-    Title.Font = Enum.Font.Code
+    Title.Font = Enum.Font.SourceSansPro
     Title.Text = "Folder"
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title.TextSize = 14.000
@@ -296,7 +297,7 @@ do -- Load items
     Title_2.Position = UDim2.new(0, 30, 0, 0)
     Title_2.Size = UDim2.new(1, -30, 1, 0)
     Title_2.ZIndex = 4
-    Title_2.Font = Enum.Font.Code
+    Title_2.Font = Enum.Font.SourceSansPro
     Title_2.Text = "ImGui Demo"
     Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title_2.TextSize = 16.000
@@ -432,7 +433,7 @@ do -- Load items
     Text.BackgroundTransparency = 1.000
     Text.Position = UDim2.new(0, 28, 0, 0)
     Text.Size = UDim2.new(0, 42, 1, 0)
-    Text.Font = Enum.Font.Code
+    Text.Font = Enum.Font.SourceSansPro
     Text.Text = "Switch"
     Text.TextColor3 = Color3.fromRGB(255, 255, 255)
     Text.TextSize = 14.000
@@ -479,7 +480,7 @@ do -- Load items
     Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Value.BackgroundTransparency = 1.000
     Value.Size = UDim2.new(1, 0, 1, 0)
-    Value.Font = Enum.Font.Code
+    Value.Font = Enum.Font.SourceSansPro
     Value.Text = "6.00"
     Value.TextColor3 = Color3.fromRGB(255, 255, 255)
     Value.TextSize = 14.000
@@ -490,7 +491,7 @@ do -- Load items
     Text_2.BackgroundTransparency = 1.000
     Text_2.Position = UDim2.new(0, 158, 0, 0)
     Text_2.Size = UDim2.new(0, 42, 1, 0)
-    Text_2.Font = Enum.Font.Code
+    Text_2.Font = Enum.Font.SourceSansPro
     Text_2.Text = "Slider"
     Text_2.TextColor3 = Color3.fromRGB(255, 255, 255)
     Text_2.TextSize = 14.000
@@ -503,7 +504,7 @@ do -- Load items
     Button_2.BorderSizePixel = 0
     Button_2.Size = UDim2.new(0, 72, 0, 20)
     Button_2.ZIndex = 3
-    Button_2.Font = Enum.Font.Code
+    Button_2.Font = Enum.Font.SourceSansPro
     Button_2.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button_2.TextSize = 14.000
 
