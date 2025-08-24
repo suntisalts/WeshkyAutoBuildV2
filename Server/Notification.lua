@@ -105,28 +105,33 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         coroutine.wrap(ORBHB_fake_script)()
 
     elseif SelectedType == "image" then
+        -- Animate entry
         ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
         Window.Size = UDim2.new(0, 230, 0, 80)
         WindowTitle.Position = UDim2.new(0, 24, 0, 2)
-
-        local ImageButton = Instance.new("ImageButton")
-        ImageButton.Parent = Window
-        ImageButton.BackgroundTransparency = 1.000
-        ImageButton.BorderSizePixel = 0
-        ImageButton.Position = UDim2.new(0, 4, 0, 4)
-        ImageButton.Size = UDim2.new(0, 18, 0, 18)
-        ImageButton.ZIndex = 5
-        ImageButton.AutoButtonColor = false
-        ImageButton.Image = all.Image
-        ImageButton.ImageColor3 = all.ImageColor
-
+    
+        task.delay(0.2, function()
+            -- Create image AFTER tween to avoid visual bugs
+            local ImageButton = Instance.new("ImageButton")
+            ImageButton.Parent = Window
+            ImageButton.BackgroundTransparency = 1.000
+            ImageButton.BorderSizePixel = 0
+            ImageButton.Position = UDim2.new(0, 4, 0, 4)
+            ImageButton.Size = UDim2.new(0, 18, 0, 18)
+            ImageButton.ZIndex = 5
+            ImageButton.AutoButtonColor = false
+            ImageButton.Image = all.Image
+            ImageButton.ImageColor3 = all.ImageColor
+        end)
+    
         local function ORBHB_fake_script()
             local tween = TweenService:Create(Outline_A, TweenInfo.new(middledebug.Time), {Size = UDim2.new(0, 0, 0, 2)})
             tween:Play()
             tween.Completed:Wait()
-
+    
             ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
             wait(0.2)
+    
             for i, v in ipairs(ActiveNotifications) do
                 if v == ambientShadow then
                     table.remove(ActiveNotifications, i)
