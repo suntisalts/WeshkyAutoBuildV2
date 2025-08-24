@@ -2160,7 +2160,6 @@ local library library = {
                             updateCanvas()
                         end
 
-                        -- Update text display
                         local function updateTextDisplay()
                             if canType then
                                 local displayTextStr = searchText
@@ -2299,6 +2298,14 @@ local library library = {
                             showCursor = false
                             self.search("")
                             updateTextDisplay()
+                        end)
+
+                        clearButton.MouseButton1Click:Connect(function()
+                            searchText = ""
+                            canType = false  -- Exit typing mode
+                            showCursor = false
+                            self.search("")
+                            updateTextDisplay()  -- This will show the placeholder
                         end)
 
                         clearButton.MouseEnter:Connect(function()
