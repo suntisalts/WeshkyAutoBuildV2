@@ -2244,22 +2244,37 @@ local library library = {
                                     return
                                 end
                                 
-                                -- Handle letters A-Z
-                                if keycode.Value >= 65 and keycode.Value <= 90 then
+                                -- Get the key name and check if it's a single character
+                                local keyName = keycode.Name
+                                local char = nil
+                                
+                                -- Check if it's a letter key (A-Z)
+                                if #keyName == 1 and keyName:match("%a") then
                                     local isShiftPressed = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift)
-                                    local letter = string.char(keycode.Value)
-                                    if not isShiftPressed then
-                                        letter = letter:lower()
-                                    end
-                                    searchText = searchText .. letter
-                                    self.search(searchText)
-                                    updateTextDisplay()
+                                    char = isShiftPressed and keyName or keyName:lower()
                                 end
                                 
-                                -- Handle numbers 0-9
-                                if keycode.Value >= 48 and keycode.Value <= 57 then
-                                    local number = tostring(keycode.Value - 48)
-                                    searchText = searchText .. number
+                                -- Check if it's a number key from top row
+                                local numberMap = {
+                                    Zero = "0", One = "1", Two = "2", Three = "3", Four = "4",
+                                    Five = "5", Six = "6", Seven = "7", Eight = "8", Nine = "9"
+                                }
+                                if numberMap[keyName] then
+                                    char = numberMap[keyName]
+                                end
+                                
+                                -- Check if it's a keypad number
+                                local keypadMap = {
+                                    KeypadZero = "0", KeypadOne = "1", KeypadTwo = "2", KeypadThree = "3", KeypadFour = "4",
+                                    KeypadFive = "5", KeypadSix = "6", KeypadSeven = "7", KeypadEight = "8", KeypadNine = "9"
+                                }
+                                if keypadMap[keyName] then
+                                    char = keypadMap[keyName]
+                                end
+                                
+                                -- Add the character if found
+                                if char then
+                                    searchText = searchText .. char
                                     self.search(searchText)
                                     updateTextDisplay()
                                 end
