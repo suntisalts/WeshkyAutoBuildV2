@@ -2120,7 +2120,7 @@ local library library = {
                         local showCursor = false
                         local lastTick = tick()
 
-                        -- Hide the original text label and use our own
+                        -- Hide the original text label
                         TextBox.Visible = false
                         
                         -- Create a TextLabel for display
@@ -2183,16 +2183,16 @@ local library library = {
                             end
                         end
 
-                        -- Handle click to focus - connect to the Frame, not ImageLabel
-                        local innerButton = Instance.new("TextButton")
-                        innerButton.Size = UDim2.new(1, 0, 1, 0)
-                        innerButton.Position = UDim2.new(0, 0, 0, 0)
-                        innerButton.BackgroundTransparency = 1
-                        innerButton.Text = ""
-                        innerButton.ZIndex = inner.ZIndex + 2
-                        innerButton.Parent = inner
+                        -- Create a transparent button overlay for clicking
+                        local clickArea = Instance.new("TextButton")
+                        clickArea.Size = UDim2.new(1, 0, 1, 0)
+                        clickArea.Position = UDim2.new(0, 0, 0, 0)
+                        clickArea.BackgroundTransparency = 1
+                        clickArea.Text = ""
+                        clickArea.ZIndex = inner.ZIndex + 2
+                        clickArea.Parent = inner
 
-                        innerButton.MouseButton1Click:Connect(function()
+                        clickArea.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
                                 canType = true
                                 updateTextDisplay()
@@ -2244,8 +2244,8 @@ local library library = {
                                     return
                                 end
                                 
-                                -- Handle letters
-                                if keycode.Value >= 65 and keycode.Value <= 90 then -- A-Z
+                                -- Handle letters A-Z
+                                if keycode.Value >= 65 and keycode.Value <= 90 then
                                     local isShiftPressed = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift)
                                     local letter = string.char(keycode.Value)
                                     if not isShiftPressed then
@@ -2254,11 +2254,10 @@ local library library = {
                                     searchText = searchText .. letter
                                     self.search(searchText)
                                     updateTextDisplay()
-                                    return
                                 end
                                 
-                                -- Handle numbers
-                                if keycode.Value >= 48 and keycode.Value <= 57 then -- 0-9
+                                -- Handle numbers 0-9
+                                if keycode.Value >= 48 and keycode.Value <= 57 then
                                     local number = tostring(keycode.Value - 48)
                                     searchText = searchText .. number
                                     self.search(searchText)
@@ -2267,7 +2266,7 @@ local library library = {
                             end
                         end)
 
-                        -- Add clear button (use TextButton, not on ImageLabel)
+                        -- Add clear button
                         local clearButton = Instance.new("TextButton")
                         clearButton.Size = UDim2.new(0, 20, 1, 0)
                         clearButton.Position = UDim2.new(1, -20, 0, 0)
@@ -2296,18 +2295,16 @@ local library library = {
 
                         -- Click outside to lose focus
                         UserInputService.InputBegan:Connect(function(inputObject)
-                            if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
-                                if canType then
-                                    local mousePos = UserInputService:GetMouseLocation()
-                                    local innerAbsPos = inner.AbsolutePosition
-                                    local innerAbsSize = inner.AbsoluteSize
-                                    
-                                    if not (mousePos.X >= innerAbsPos.X and mousePos.X <= innerAbsPos.X + innerAbsSize.X and
-                                        mousePos.Y >= innerAbsPos.Y and mousePos.Y <= innerAbsPos.Y + innerAbsSize.Y) then
-                                        canType = false
-                                        showCursor = false
-                                        updateTextDisplay()
-                                    end
+                            if inputObject.UserInputType == Enum.UserInputType.MouseButton1 and canType then
+                                local mousePos = UserInputService:GetMouseLocation()
+                                local innerAbsPos = inner.AbsolutePosition
+                                local innerAbsSize = inner.AbsoluteSize
+                                
+                                if not (mousePos.X >= innerAbsPos.X and mousePos.X <= innerAbsPos.X + innerAbsSize.X and
+                                    mousePos.Y >= innerAbsPos.Y and mousePos.Y <= innerAbsPos.Y + innerAbsSize.Y) then
+                                    canType = false
+                                    showCursor = false
+                                    updateTextDisplay()
                                 end
                             end
                         end)
