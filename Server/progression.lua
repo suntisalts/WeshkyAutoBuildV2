@@ -33,7 +33,7 @@ function progressionBar.new()
     progressBar.BackgroundTransparency = 1
     progressBar.Size = UDim2.new(0, 0, 1, 0)
     progressBar.Image = "rbxassetid://2851926732"
-    progressBar.ImageColor3 = Color3.fromRGB(41, 74, 122)
+    progressBar.ImageColor3 = Color3.fromRGB(176, 27, 16)
     progressBar.ScaleType = Enum.ScaleType.Slice
     progressBar.SliceCenter = Rect.new(12, 12, 12, 12)
     progressBar.Parent = mainContainer
