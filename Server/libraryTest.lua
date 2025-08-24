@@ -1,5 +1,3 @@
-local tzu = Enum.Font.Gotham
-
 --[[
 	rbimgui-2
 	version 1.2
@@ -12,6 +10,8 @@ repeat wait() until game:GetService("Players").LocalPlayer
 if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
+
+local tzu = Enum.Font.SourceSansBold
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
