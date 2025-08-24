@@ -2296,6 +2296,7 @@ local library library = {
                         clearButton.MouseButton1Click:Connect(function()
                             searchText = ""
                             canType = true
+                            showCursor = false
                             self.search("")
                             updateTextDisplay()
                         end)
