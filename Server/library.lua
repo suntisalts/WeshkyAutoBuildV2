@@ -1992,7 +1992,7 @@ local library library = {
                     inner.ImageColor3 = dropdownOptions.color
                     outer.SliceScale = dropdownOptions.rounding / 100
                     inner.SliceScale = dropdownOptions.rounding / 100
-                    inner:FindFirstChild("Value").Text = "[Selecte...]"
+                    inner:FindFirstChild("Value").Text = "[...]"
 
                     text.Text = dropdownOptions.text
                     dropdownWindow:FindFirstChild("Title").Text = dropdownOptions.text
@@ -2112,6 +2112,7 @@ local library library = {
                     do -- search bar
                         local TextBox = dropdownWindow:FindFirstChild("Content"):FindFirstChild("Search"):FindFirstChild("Outer"):FindFirstChild("Inner"):FindFirstChild("TextBox")
                         local inTextBox = false
+                        
                         TextBox.MouseEnter:Connect(function()
                             inTextBox = true
                         end)
@@ -2119,12 +2120,28 @@ local library library = {
                             inTextBox = false
                         end)
 
+                        -- Define the search function
+                        function self.search(searchText)
+                            searchText = searchText:lower()
+                            
+                            for i, v in next, dropdownObjects do
+                                local objectName = v.name:lower()
+                                if searchText == "" or objectName:find(searchText, 1, true) then
+                                    v.object.Visible = true
+                                else
+                                    v.object.Visible = false
+                                end
+                            end
+                            updateCanvas()
+                        end
+
                         local lastTick = tick()
                         local lastTickN = 1
                         local text = ""
                         local canSearch = false
                         local shift = false
                         local backspace = false
+                        
                         local function updateTextBox()
                             lastTick = tick()
                             lastTickN = 1
@@ -2160,10 +2177,22 @@ local library library = {
 
                         UserInputService.InputBegan:Connect(function(inputObject)
                             local keycode = inputObject.KeyCode
+                            
                             if keycode == Enum.KeyCode.LeftShift then
                                 shift = true
                             end
+                            
                             if canSearch then
+                                -- Handle Enter key to confirm selection
+                                if keycode == Enum.KeyCode.Return or keycode == Enum.KeyCode.KeypadEnter then
+                                    canSearch = false
+                                    textBox.TextColor3 = Color3.fromRGB(178, 178, 178)
+                                    if text == "" then
+                                        TextBox.Text = "Search ..."
+                                    end
+                                    return
+                                end
+                                
                                 if keycode == Enum.KeyCode.Backspace then
                                     backspace = true
                                     text = text:sub(1, -2)
@@ -2187,21 +2216,20 @@ local library library = {
                                     text = text .. " "
                                     updateTextBox()
                                 end
+                                
+                                -- Handle alphanumeric input
                                 if betweenOpenInterval(keycode.Value, 48, 57) then -- 0-9
-                                    local name = rawget({ Zero = 0, One = 1, Two = 2, Three = 3, Four = 4, Five = 5, Six = 6, Seven = 7, Eight = 8, Nine = 9 }, keycode.Name)
-                                    -- if shift then
-                                    --     name = rawget({ "=", "!", '"', "#", "¤", "%", "&", "/", "(", ")" }, name + 1)
-                                    -- end
+                                    local name = rawget({ Zero = "0", One = "1", Two = "2", Three = "3", Four = "4", Five = "5", Six = "6", Seven = "7", Eight = "8", Nine = "9" }, keycode.Name)
                                     text = text .. name
                                     updateTextBox()
-                                end
-                                if betweenOpenInterval(keycode.Value, 97, 122) then -- A-Z
+                                elseif betweenOpenInterval(keycode.Value, 65, 90) then -- A-Z
                                     local name = (not shift) and keycode.Name:lower() or keycode.Name
                                     text = text .. name
                                     updateTextBox()
                                 end
                             end
                         end)
+                        
                         UserInputService.InputEnded:Connect(function(inputObject)
                             if inputObject.KeyCode == Enum.KeyCode.LeftShift then
                                 shift = false
