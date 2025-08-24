@@ -1,7 +1,6 @@
 local Nofitication = {}
 local TweenService = game:GetService("TweenService")
 
--- Ensure GUI exists
 local GUI = game:GetService("CoreGui"):FindFirstChild("STX_Nofitication")
 if not GUI then
     GUI = Instance.new("ScreenGui")
@@ -10,10 +9,9 @@ if not GUI then
     GUI.Parent = game:GetService("CoreGui")
 end
 
--- === Notification Stack System ===
 local ActiveNotifications = {}
-local baseY = 0.936 -- Starting vertical position
-local yOffset = 0.11 -- Space between notifications
+local baseY = 0.936
+local yOffset = 0.11
 
 function Nofitication:Notify(nofdebug, middledebug, all)
     local SelectedType = string.lower(tostring(middledebug.Type))
@@ -24,12 +22,10 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     local WindowTitle = Instance.new("TextLabel")
     local WindowDescription = Instance.new("TextLabel")
 
-    -- Determine stack position
     local index = #ActiveNotifications + 1
     table.insert(ActiveNotifications, ambientShadow)
     ambientShadow.Position = UDim2.new(0.91525954, 0, baseY - ((index - 1) * yOffset), 0)
 
-    -- GUI setup
     ambientShadow.Name = "ambientShadow"
     ambientShadow.Parent = GUI
     ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -45,6 +41,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     Window.Name = "Window"
     Window.Parent = ambientShadow
     Window.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+    Window.BackgroundTransparency = 0.2
     Window.BorderSizePixel = 0
     Window.Position = UDim2.new(0, 5, 0, 5)
     Window.Size = UDim2.new(0, 230, 0, 80)
@@ -86,7 +83,6 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     WindowDescription.TextXAlignment = Enum.TextXAlignment.Left
     WindowDescription.TextYAlignment = Enum.TextYAlignment.Top
 
-    -- === DEFAULT Notification ===
     if SelectedType == "default" then
         local function ORBHB_fake_script()
             ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
@@ -108,7 +104,6 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         end
         coroutine.wrap(ORBHB_fake_script)()
 
-    -- === IMAGE Notification ===
     elseif SelectedType == "image" then
         ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
         Window.Size = UDim2.new(0, 230, 0, 80)
@@ -142,7 +137,6 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         end
         coroutine.wrap(ORBHB_fake_script)()
 
-    -- === OPTION Notification ===
     elseif SelectedType == "option" then
         ambientShadow:TweenSize(UDim2.new(0, 240, 0, 110), "Out", "Linear", 0.2)
         Window.Size = UDim2.new(0, 230, 0, 100)
