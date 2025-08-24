@@ -2301,14 +2301,6 @@ local library library = {
                             updateTextDisplay()
                         end)
 
-                        clearButton.MouseButton1Click:Connect(function()
-                            searchText = ""
-                            canType = false  -- Exit typing mode
-                            showCursor = false
-                            self.search("")
-                            updateTextDisplay()  -- This will show the placeholder
-                        end)
-
                         clearButton.MouseEnter:Connect(function()
                             clearButton.TextColor3 = Color3.new(1, 1, 1)
                         end)
