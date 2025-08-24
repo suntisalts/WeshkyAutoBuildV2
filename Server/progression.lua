@@ -12,7 +12,6 @@ local progressionBar = {}
 function progressionBar.new()
     local self = {}
     
-    -- UI-Elemente erstellen
     local screenGui = Instance.new("ScreenGui")
     screenGui.Name = "progressBar"
     screenGui.Parent = game:GetService("CoreGui")
@@ -63,7 +62,6 @@ function progressionBar.new()
     percentageLabel.TextXAlignment = Enum.TextXAlignment.Left
     percentageLabel.Parent = mainContainer
     
-    -- Status-Variablen
     local totalBlocks = 0
     local processedBlocks = 0
     local isVisible = true
@@ -99,6 +97,21 @@ function progressionBar.new()
     function self:SetVisibility(visible)
         isVisible = visible
         screenGui.Enabled = visible
+    end
+    
+    function self:Reset()
+        totalBlocks = 0
+        processedBlocks = 0
+        self:Update(0)
+        return self
+    end
+    
+    function self:GetProgress()
+        return {
+            totalBlocks = totalBlocks,
+            processedBlocks = processedBlocks,
+            percentage = totalBlocks > 0 and (processedBlocks / totalBlocks) * 100 or 0
+        }
     end
     
     function self:Destroy()
