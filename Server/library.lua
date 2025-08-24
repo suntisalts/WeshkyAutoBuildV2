@@ -2109,45 +2109,28 @@ local library library = {
                         return dropdownObject
                     end
 
-                    do -- search bar
+                    do -- search bar (manual input version)
                         local searchFrame = dropdownWindow:FindFirstChild("Content"):FindFirstChild("Search")
                         local outer = searchFrame:FindFirstChild("Outer")
                         local inner = outer:FindFirstChild("Inner")
                         local TextBox = inner:FindFirstChild("TextBox")
                         
-                        -- Create a proper TextBox for input
-                        local realTextBox = Instance.new("TextBox")
-                        realTextBox.Size = UDim2.new(1, -30, 1, 0)
-                        realTextBox.Position = UDim2.new(0, 30, 0, 0)
-                        realTextBox.BackgroundTransparency = 1
-                        realTextBox.TextColor3 = Color3.new(1, 1, 1)
-                        realTextBox.Text = ""
-                        realTextBox.PlaceholderText = "Search ..."
-                        realTextBox.PlaceholderColor3 = Color3.fromRGB(178, 178, 178)
-                        realTextBox.ClearTextOnFocus = false
-                        realTextBox.TextXAlignment = Enum.TextXAlignment.Left
-                        realTextBox.Font = Enum.Font.SourceSans
-                        realTextBox.TextSize = 14
-                        realTextBox.Parent = inner
-                        
-                        -- Hide the original text label
-                        TextBox.Visible = false
+                        local searchText = ""
+                        local canType = false
+                        local showCursor = false
+                        local lastTick = tick()
 
-                        local inTextBox = false
+                        TextBox.Visible = true
+                        TextBox.Text = "Search ..."
+                        TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
+
                         local searchIcon = Instance.new("ImageLabel")
                         searchIcon.Size = UDim2.new(0, 16, 0, 16)
                         searchIcon.Position = UDim2.new(0, 7, 0.5, -8)
                         searchIcon.BackgroundTransparency = 1
-                        searchIcon.Image = "rbxassetid://11144378537" -- Search icon
+                        searchIcon.Image = "rbxassetid://11144378537"
                         searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
                         searchIcon.Parent = inner
-
-                        realTextBox.MouseEnter:Connect(function()
-                            inTextBox = true
-                        end)
-                        realTextBox.MouseLeave:Connect(function()
-                            inTextBox = false
-                        end)
 
                         -- Define the search function
                         function self.search(searchText)
@@ -2164,28 +2147,87 @@ local library library = {
                             updateCanvas()
                         end
 
-                        -- Focus the textbox when clicked
+                        -- Update text display
+                        local function updateTextDisplay()
+                            if canType then
+                                local displayText = searchText
+                                if showCursor then
+                                    displayText = displayText .. "|"
+                                end
+                                TextBox.Text = displayText
+                                TextBox.TextColor3 = Color3.new(1, 1, 1)
+                                searchIcon.ImageColor3 = Color3.new(1, 1, 1)
+                            else
+                                if searchText == "" then
+                                    TextBox.Text = "Search ..."
+                                    TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
+                                    searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
+                                else
+                                    TextBox.Text = searchText
+                                    TextBox.TextColor3 = Color3.new(1, 1, 1)
+                                    searchIcon.ImageColor3 = Color3.new(1, 1, 1)
+                                end
+                            end
+                        end
+
+                        -- Handle click to focus
                         inner.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
-                                realTextBox:CaptureFocus()
+                                canType = true
+                                updateTextDisplay()
+                                
+                                -- Cursor blinking effect
+                                spawn(function()
+                                    while canType do
+                                        if tick() - lastTick >= 0.5 then
+                                            lastTick = tick()
+                                            showCursor = not showCursor
+                                            updateTextDisplay()
+                                        end
+                                        RunService.Heartbeat:Wait()
+                                    end
+                                end)
                             end
                         end)
 
-                        -- Handle text changes
-                        realTextBox:GetPropertyChangedSignal("Text"):Connect(function()
-                            self.search(realTextBox.Text)
-                        end)
-
-                        -- Handle focus events
-                        realTextBox.Focused:Connect(function()
-                            realTextBox.PlaceholderText = ""
-                            searchIcon.ImageColor3 = Color3.new(1, 1, 1)
-                        end)
-
-                        realTextBox.FocusLost:Connect(function()
-                            if realTextBox.Text == "" then
-                                realTextBox.PlaceholderText = "Search ..."
-                                searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
+                        -- Handle keyboard input
+                        UserInputService.InputBegan:Connect(function(inputObject)
+                            if canType and findBrowsingTopMost() == dropdownWindow then
+                                local keycode = inputObject.KeyCode
+                                
+                                if keycode == Enum.KeyCode.Return or keycode == Enum.KeyCode.KeypadEnter then
+                                    canType = false
+                                    showCursor = false
+                                    updateTextDisplay()
+                                    return
+                                end
+                                
+                                if keycode == Enum.KeyCode.Backspace then
+                                    searchText = searchText:sub(1, -2)
+                                    self.search(searchText)
+                                    updateTextDisplay()
+                                    return
+                                end
+                                
+                                if keycode == Enum.KeyCode.Space then
+                                    searchText = searchText .. " "
+                                    self.search(searchText)
+                                    updateTextDisplay()
+                                    return
+                                end
+                                
+                                -- Handle letters and numbers
+                                local keyName = keycode.Name
+                                if #keyName == 1 then -- Single character keys (A, B, C, etc.)
+                                    searchText = searchText .. keyName:lower()
+                                    self.search(searchText)
+                                    updateTextDisplay()
+                                elseif betweenOpenInterval(keycode.Value, 48, 57) then -- Number keys
+                                    local number = keyName:sub(-1) -- Get the last character (One -> 1, Two -> 2, etc.)
+                                    searchText = searchText .. number
+                                    self.search(searchText)
+                                    updateTextDisplay()
+                                end
                             end
                         end)
 
@@ -2201,9 +2243,10 @@ local library library = {
                         clearButton.Parent = inner
 
                         clearButton.MouseButton1Click:Connect(function()
-                            realTextBox.Text = ""
+                            searchText = ""
+                            canType = true
                             self.search("")
-                            realTextBox:CaptureFocus()
+                            updateTextDisplay()
                         end)
 
                         clearButton.MouseEnter:Connect(function()
