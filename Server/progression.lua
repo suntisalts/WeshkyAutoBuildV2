@@ -66,19 +66,17 @@ function progressionBar.new()
     local processedBlocks = 0
     local isVisible = true
     
-    function self:Update(text)
-        local progress = percentageLabel
-        local progressBarFill = progressBar
-        
-        if typeof(text) == "number" then
-            local percentage = math.clamp(text, 0, 100)
-            progress.Text = string.format("%d%%", math.floor(percentage))
-            progressBarFill.Size = UDim2.new(percentage / 100, 0, 1, 0)
+    function self:Update(value)
+        if not screenGui or not screenGui.Parent then return end
+    
+        if typeof(value) == "number" then
+            local percentage = math.clamp(value, 0, 100)
+            percentageLabel.Text = string.format("%d%%", math.floor(percentage))
+            progressBar.Size = UDim2.new(percentage / 100, 0, 1, 0)
+        elseif typeof(value) == "string" then
+            percentageLabel.Text = value
         else
-            progress.Text = tostring(text)
-            progressBarFill.Size = UDim2.new(1, 0, 1, 0)
-        else
-            warn("ProgressBar: Update expects number or string, got " .. typeof(text))
+            warn("ProgressBar: Update expects number or string, got " .. typeof(value))
         end
     end
     
