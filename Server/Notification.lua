@@ -1,28 +1,36 @@
 local Nofitication = {}
 local TweenService = game:GetService("TweenService")
 
--- Sicherstellen, dass STX_Nofitication im CoreGui existiert
 local GUI = game:GetService("CoreGui"):FindFirstChild("STX_Nofitication")
 if not GUI then
     GUI = Instance.new("ScreenGui")
     GUI.Name = "STX_Nofitication"
+    GUI.ResetOnSpawn = false
     GUI.Parent = game:GetService("CoreGui")
 end
 
+local ActiveNotifications = {}
+local baseY = 0.936
+local yOffset = 0.11
+
 function Nofitication:Notify(nofdebug, middledebug, all)
     local SelectedType = string.lower(tostring(middledebug.Type))
+
     local ambientShadow = Instance.new("ImageLabel")
     local Window = Instance.new("Frame")
     local Outline_A = Instance.new("Frame")
     local WindowTitle = Instance.new("TextLabel")
     local WindowDescription = Instance.new("TextLabel")
 
+    local index = #ActiveNotifications + 1
+    table.insert(ActiveNotifications, ambientShadow)
+    ambientShadow.Position = UDim2.new(0.91525954, 0, baseY - ((index - 1) * yOffset), 0)
+
     ambientShadow.Name = "ambientShadow"
     ambientShadow.Parent = GUI
     ambientShadow.AnchorPoint = Vector2.new(0.5, 0.5)
     ambientShadow.BackgroundTransparency = 1.000
     ambientShadow.BorderSizePixel = 0
-    ambientShadow.Position = UDim2.new(0.91525954, 0, 0.936809778, 0)
     ambientShadow.Size = UDim2.new(0, 0, 0, 0)
     ambientShadow.Image = "rbxassetid://1316045217"
     ambientShadow.ImageColor3 = Color3.fromRGB(0, 0, 0)
@@ -50,7 +58,6 @@ function Nofitication:Notify(nofdebug, middledebug, all)
     WindowTitle.Parent = Window
     WindowTitle.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     WindowTitle.BackgroundTransparency = 1.000
-    WindowTitle.BorderColor3 = Color3.fromRGB(27, 42, 53)
     WindowTitle.BorderSizePixel = 0
     WindowTitle.Position = UDim2.new(0, 8, 0, 2)
     WindowTitle.Size = UDim2.new(0, 222, 0, 22)
@@ -63,10 +70,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
 
     WindowDescription.Name = "WindowDescription"
     WindowDescription.Parent = Window
-    WindowDescription.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     WindowDescription.BackgroundTransparency = 1.000
-    WindowDescription.BorderColor3 = Color3.fromRGB(27, 42, 53)
-    WindowDescription.BorderSizePixel = 0
     WindowDescription.Position = UDim2.new(0, 8, 0, 34)
     WindowDescription.Size = UDim2.new(0, 216, 0, 40)
     WindowDescription.ZIndex = 4
@@ -83,13 +87,18 @@ function Nofitication:Notify(nofdebug, middledebug, all)
             ambientShadow:TweenSize(UDim2.new(0, 240, 0, 90), "Out", "Linear", 0.2)
             Window.Size = UDim2.new(0, 230, 0, 80)
 
-            local tweenInfo = TweenInfo.new(middledebug.Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-            local tween = TweenService:Create(Outline_A, tweenInfo, {Size = UDim2.new(0, 0, 0, 2)})
+            local tween = TweenService:Create(Outline_A, TweenInfo.new(middledebug.Time), {Size = UDim2.new(0, 0, 0, 2)})
             tween:Play()
             tween.Completed:Wait()
 
             ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
             wait(0.2)
+            for i, v in ipairs(ActiveNotifications) do
+                if v == ambientShadow then
+                    table.remove(ActiveNotifications, i)
+                    break
+                end
+            end
             ambientShadow:Destroy()
         end
         coroutine.wrap(ORBHB_fake_script)()
@@ -101,7 +110,6 @@ function Nofitication:Notify(nofdebug, middledebug, all)
 
         local ImageButton = Instance.new("ImageButton")
         ImageButton.Parent = Window
-        ImageButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         ImageButton.BackgroundTransparency = 1.000
         ImageButton.BorderSizePixel = 0
         ImageButton.Position = UDim2.new(0, 4, 0, 4)
@@ -112,13 +120,18 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         ImageButton.ImageColor3 = all.ImageColor
 
         local function ORBHB_fake_script()
-            local tweenInfo = TweenInfo.new(middledebug.Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-            local tween = TweenService:Create(Outline_A, tweenInfo, {Size = UDim2.new(0, 0, 0, 2)})
+            local tween = TweenService:Create(Outline_A, TweenInfo.new(middledebug.Time), {Size = UDim2.new(0, 0, 0, 2)})
             tween:Play()
             tween.Completed:Wait()
 
             ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
             wait(0.2)
+            for i, v in ipairs(ActiveNotifications) do
+                if v == ambientShadow then
+                    table.remove(ActiveNotifications, i)
+                    break
+                end
+            end
             ambientShadow:Destroy()
         end
         coroutine.wrap(ORBHB_fake_script)()
@@ -132,9 +145,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
 
         Uncheck.Name = "Uncheck"
         Uncheck.Parent = Window
-        Uncheck.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Uncheck.BackgroundTransparency = 1.000
-        Uncheck.BorderSizePixel = 0
         Uncheck.Position = UDim2.new(0, 7, 0, 76)
         Uncheck.Size = UDim2.new(0, 18, 0, 18)
         Uncheck.ZIndex = 5
@@ -144,9 +155,7 @@ function Nofitication:Notify(nofdebug, middledebug, all)
 
         Check.Name = "Check"
         Check.Parent = Window
-        Check.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
         Check.BackgroundTransparency = 1.000
-        Check.BorderSizePixel = 0
         Check.Position = UDim2.new(0, 28, 0, 76)
         Check.Size = UDim2.new(0, 18, 0, 18)
         Check.ZIndex = 5
@@ -155,39 +164,52 @@ function Nofitication:Notify(nofdebug, middledebug, all)
         Check.ImageColor3 = Color3.fromRGB(83, 230, 50)
 
         local function ORBHB_fake_script()
-            local Stilthere = true
+            local StillHere = true
 
             local function Unchecked()
-                pcall(function()
-                    all.Callback(false)
-                end)
+                pcall(function() all.Callback(false) end)
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
                 wait(0.2)
+                StillHere = false
+                for i, v in ipairs(ActiveNotifications) do
+                    if v == ambientShadow then
+                        table.remove(ActiveNotifications, i)
+                        break
+                    end
+                end
                 ambientShadow:Destroy()
-                Stilthere = false
             end
 
             local function Checked()
-                pcall(function()
-                    all.Callback(true)
-                end)
+                pcall(function() all.Callback(true) end)
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
                 wait(0.2)
+                StillHere = false
+                for i, v in ipairs(ActiveNotifications) do
+                    if v == ambientShadow then
+                        table.remove(ActiveNotifications, i)
+                        break
+                    end
+                end
                 ambientShadow:Destroy()
-                Stilthere = false
             end
 
             Uncheck.MouseButton1Click:Connect(Unchecked)
             Check.MouseButton1Click:Connect(Checked)
 
-            local tweenInfo = TweenInfo.new(middledebug.Time, Enum.EasingStyle.Linear, Enum.EasingDirection.Out)
-            local tween = TweenService:Create(Outline_A, tweenInfo, {Size = UDim2.new(0, 0, 0, 2)})
+            local tween = TweenService:Create(Outline_A, TweenInfo.new(middledebug.Time), {Size = UDim2.new(0, 0, 0, 2)})
             tween:Play()
             tween.Completed:Wait()
 
-            if Stilthere == true then
+            if StillHere then
                 ambientShadow:TweenSize(UDim2.new(0, 0, 0, 0), "Out", "Linear", 0.2)
                 wait(0.2)
+                for i, v in ipairs(ActiveNotifications) do
+                    if v == ambientShadow then
+                        table.remove(ActiveNotifications, i)
+                        break
+                    end
+                end
                 ambientShadow:Destroy()
             end
         end
