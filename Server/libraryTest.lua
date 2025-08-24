@@ -1,4 +1,3 @@
-Code
 --[[
 	rbimgui-2
 	version 1.2
@@ -383,7 +382,7 @@ do -- Load items
     Button.BorderSizePixel = 0
     Button.Size = UDim2.new(0, 20, 0, 20)
     Button.ZIndex = 3
-    Button.Font = Enum.Font.Code
+    Button.Font = Enum.Font.SourceSansPro
     Button.Text = ""
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button.TextSize = 14.000
@@ -581,7 +580,7 @@ do -- Load items
     heading.Position = UDim2.new(0, 100, 0, 24)
     heading.Size = UDim2.new(1, -100, 0, 50)
     heading.ZIndex = 3
-    heading.Font = Enum.Font.GothamBlack
+    heading.Font = Enum.Font.SourceSansPro
     heading.Text = "welcome, singularity"
     heading.TextColor3 = Color3.fromRGB(255, 255, 255)
     heading.TextSize = 14.000
@@ -608,7 +607,7 @@ do -- Load items
     SubHeading.Position = UDim2.new(0, 100, 0, 44)
     SubHeading.Size = UDim2.new(1, -100, 0, 50)
     SubHeading.ZIndex = 3
-    SubHeading.Font = Enum.Font.Gotham
+    SubHeading.Font = Enum.Font.SourceSansPro
     SubHeading.Text = "subheading"
     SubHeading.TextColor3 = Color3.fromRGB(255, 255, 255)
     SubHeading.TextSize = 14.000
@@ -628,7 +627,7 @@ do -- Load items
     Button_3.BorderSizePixel = 0
     Button_3.Size = UDim2.new(0, 20, 0, 20)
     Button_3.ZIndex = 3
-    Button_3.Font = Enum.Font.Code
+    Button_3.Font = Enum.Font.SourceSansPro
     Button_3.Text = ""
     Button_3.TextColor3 = Color3.fromRGB(255, 255, 255)
     Button_3.TextSize = 14.000
@@ -677,7 +676,7 @@ do -- Load items
     Text_3.BackgroundTransparency = 1.000
     Text_3.Position = UDim2.new(0, 28, 0, 0)
     Text_3.Size = UDim2.new(0, 84, 1, 0)
-    Text_3.Font = Enum.Font.Code
+    Text_3.Font = Enum.Font.SourceSansPro
     Text_3.Text = "Color Picker"
     Text_3.TextColor3 = Color3.fromRGB(255, 255, 255)
     Text_3.TextSize = 14.000
@@ -690,7 +689,7 @@ do -- Load items
     DropdownOption.BorderSizePixel = 0
     DropdownOption.Size = UDim2.new(1, 0, 0, 20)
     DropdownOption.ZIndex = 3
-    DropdownOption.Font = Enum.Font.Code
+    DropdownOption.Font = Enum.Font.SourceSansPro
     DropdownOption.Text = "  Option"
     DropdownOption.TextColor3 = Color3.fromRGB(255, 255, 255)
     DropdownOption.TextSize = 14.000
@@ -745,7 +744,7 @@ do -- Load items
     Title_3.Position = UDim2.new(0, 30, 0, 0)
     Title_3.Size = UDim2.new(1, -30, 1, 0)
     Title_3.ZIndex = 4
-    Title_3.Font = Enum.Font.Code
+    Title_3.Font = Enum.Font.SourceSansPro
     Title_3.Text = "Dropdown"
     Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title_3.TextSize = 16.000
@@ -842,7 +841,7 @@ do -- Load items
     TextBox.BackgroundTransparency = 1.000
     TextBox.Position = UDim2.new(0, 30, 0, 0)
     TextBox.Size = UDim2.new(1, -30, 1, 0)
-    TextBox.Font = Enum.Font.SourceSans
+    TextBox.Font = Enum.Font.SourceSansPro
     TextBox.Text = "Search ..."
     TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
     TextBox.TextSize = 14.000
@@ -854,7 +853,7 @@ do -- Load items
     Selected.BackgroundTransparency = 1.000
     Selected.Position = UDim2.new(0, 10, 1, -30)
     Selected.Size = UDim2.new(1, -10, 0, 30)
-    Selected.Font = Enum.Font.Code
+    Selected.Font = Enum.Font.SourceSansPro
     Selected.Text = "Selected: [...]"
     Selected.TextColor3 = Color3.fromRGB(178, 178, 178)
     Selected.TextSize = 12.000
@@ -910,7 +909,7 @@ do -- Load items
     Title_4.Position = UDim2.new(0, 30, 0, 0)
     Title_4.Size = UDim2.new(1, -30, 1, 0)
     Title_4.ZIndex = 4
-    Title_4.Font = Enum.Font.Code
+    Title_4.Font = Enum.Font.SourceSansPro
     Title_4.Text = "Color Picker"
     Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
     Title_4.TextSize = 16.000
@@ -1034,7 +1033,7 @@ do -- Load items
     TextLabel.BackgroundTransparency = 1.000
     TextLabel.Position = UDim2.new(0, 10, 1, -35)
     TextLabel.Size = UDim2.new(1, -10, 0, 35)
-    TextLabel.Font = Enum.Font.Code
+    TextLabel.Font = Enum.Font.SourceSansPro
     TextLabel.Text = "Selected:"
     TextLabel.TextColor3 = Color3.fromRGB(178, 178, 178)
     TextLabel.TextSize = 12.000
@@ -1075,7 +1074,7 @@ do -- Load items
     Value_2.BackgroundTransparency = 1.000
     Value_2.Position = UDim2.new(0, 10, 0, 0)
     Value_2.Size = UDim2.new(1, -10, 1, 0)
-    Value_2.Font = Enum.Font.Code
+    Value_2.Font = Enum.Font.SourceSansPro
     Value_2.Text = "Selected"
     Value_2.TextColor3 = Color3.fromRGB(255, 255, 255)
     Value_2.TextSize = 14.000
@@ -1087,7 +1086,7 @@ do -- Load items
     Text_4.BackgroundTransparency = 1.000
     Text_4.Position = UDim2.new(0, 158, 0, 0)
     Text_4.Size = UDim2.new(0, 56, 1, 0)
-    Text_4.Font = Enum.Font.Code
+    Text_4.Font = Enum.Font.SourceSansPro
     Text_4.Text = "Dropdown"
     Text_4.TextColor3 = Color3.fromRGB(255, 255, 255)
     Text_4.TextSize = 14.000
