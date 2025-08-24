@@ -2109,7 +2109,7 @@ local library library = {
                         return dropdownObject
                     end
 
-                    do -- search bar (manual input version)
+                    do -- search bar
                         local searchFrame = dropdownWindow:FindFirstChild("Content"):FindFirstChild("Search")
                         local outer = searchFrame:FindFirstChild("Outer")
                         local inner = outer:FindFirstChild("Inner")
@@ -2120,9 +2120,21 @@ local library library = {
                         local showCursor = false
                         local lastTick = tick()
 
-                        TextBox.Visible = true
-                        TextBox.Text = "Search ..."
-                        TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
+                        -- Hide the original text label and use our own
+                        TextBox.Visible = false
+                        
+                        -- Create a TextLabel for display
+                        local displayText = Instance.new("TextLabel")
+                        displayText.Size = UDim2.new(1, -30, 1, 0)
+                        displayText.Position = UDim2.new(0, 30, 0, 0)
+                        displayText.BackgroundTransparency = 1
+                        displayText.Text = "Search ..."
+                        displayText.TextColor3 = Color3.fromRGB(178, 178, 178)
+                        displayText.TextXAlignment = Enum.TextXAlignment.Left
+                        displayText.Font = Enum.Font.SourceSans
+                        displayText.TextSize = 14
+                        displayText.ZIndex = inner.ZIndex + 1
+                        displayText.Parent = inner
 
                         local searchIcon = Instance.new("ImageLabel")
                         searchIcon.Size = UDim2.new(0, 16, 0, 16)
@@ -2130,6 +2142,7 @@ local library library = {
                         searchIcon.BackgroundTransparency = 1
                         searchIcon.Image = "rbxassetid://11144378537"
                         searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
+                        searchIcon.ZIndex = inner.ZIndex + 1
                         searchIcon.Parent = inner
 
                         -- Define the search function
@@ -2150,28 +2163,36 @@ local library library = {
                         -- Update text display
                         local function updateTextDisplay()
                             if canType then
-                                local displayText = searchText
+                                local displayTextStr = searchText
                                 if showCursor then
-                                    displayText = displayText .. "|"
+                                    displayTextStr = displayTextStr .. "|"
                                 end
-                                TextBox.Text = displayText
-                                TextBox.TextColor3 = Color3.new(1, 1, 1)
+                                displayText.Text = displayTextStr
+                                displayText.TextColor3 = Color3.new(1, 1, 1)
                                 searchIcon.ImageColor3 = Color3.new(1, 1, 1)
                             else
                                 if searchText == "" then
-                                    TextBox.Text = "Search ..."
-                                    TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
+                                    displayText.Text = "Search ..."
+                                    displayText.TextColor3 = Color3.fromRGB(178, 178, 178)
                                     searchIcon.ImageColor3 = Color3.fromRGB(178, 178, 178)
                                 else
-                                    TextBox.Text = searchText
-                                    TextBox.TextColor3 = Color3.new(1, 1, 1)
+                                    displayText.Text = searchText
+                                    displayText.TextColor3 = Color3.new(1, 1, 1)
                                     searchIcon.ImageColor3 = Color3.new(1, 1, 1)
                                 end
                             end
                         end
 
-                        -- Handle click to focus
-                        inner.MouseButton1Click:Connect(function()
+                        -- Handle click to focus - connect to the Frame, not ImageLabel
+                        local innerButton = Instance.new("TextButton")
+                        innerButton.Size = UDim2.new(1, 0, 1, 0)
+                        innerButton.Position = UDim2.new(0, 0, 0, 0)
+                        innerButton.BackgroundTransparency = 1
+                        innerButton.Text = ""
+                        innerButton.ZIndex = inner.ZIndex + 2
+                        innerButton.Parent = inner
+
+                        innerButton.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
                                 canType = true
                                 updateTextDisplay()
@@ -2202,6 +2223,13 @@ local library library = {
                                     return
                                 end
                                 
+                                if keycode == Enum.KeyCode.Escape then
+                                    canType = false
+                                    showCursor = false
+                                    updateTextDisplay()
+                                    return
+                                end
+                                
                                 if keycode == Enum.KeyCode.Backspace then
                                     searchText = searchText:sub(1, -2)
                                     self.search(searchText)
@@ -2216,14 +2244,22 @@ local library library = {
                                     return
                                 end
                                 
-                                -- Handle letters and numbers
-                                local keyName = keycode.Name
-                                if #keyName == 1 then -- Single character keys (A, B, C, etc.)
-                                    searchText = searchText .. keyName:lower()
+                                -- Handle letters
+                                if keycode.Value >= 65 and keycode.Value <= 90 then -- A-Z
+                                    local isShiftPressed = UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) or UserInputService:IsKeyDown(Enum.KeyCode.RightShift)
+                                    local letter = string.char(keycode.Value)
+                                    if not isShiftPressed then
+                                        letter = letter:lower()
+                                    end
+                                    searchText = searchText .. letter
                                     self.search(searchText)
                                     updateTextDisplay()
-                                elseif betweenOpenInterval(keycode.Value, 48, 57) then -- Number keys
-                                    local number = keyName:sub(-1) -- Get the last character (One -> 1, Two -> 2, etc.)
+                                    return
+                                end
+                                
+                                -- Handle numbers
+                                if keycode.Value >= 48 and keycode.Value <= 57 then -- 0-9
+                                    local number = tostring(keycode.Value - 48)
                                     searchText = searchText .. number
                                     self.search(searchText)
                                     updateTextDisplay()
@@ -2231,7 +2267,7 @@ local library library = {
                             end
                         end)
 
-                        -- Add clear button
+                        -- Add clear button (use TextButton, not on ImageLabel)
                         local clearButton = Instance.new("TextButton")
                         clearButton.Size = UDim2.new(0, 20, 1, 0)
                         clearButton.Position = UDim2.new(1, -20, 0, 0)
@@ -2240,6 +2276,7 @@ local library library = {
                         clearButton.TextColor3 = Color3.fromRGB(178, 178, 178)
                         clearButton.Font = Enum.Font.SourceSansBold
                         clearButton.TextSize = 14
+                        clearButton.ZIndex = inner.ZIndex + 2
                         clearButton.Parent = inner
 
                         clearButton.MouseButton1Click:Connect(function()
@@ -2256,6 +2293,26 @@ local library library = {
                         clearButton.MouseLeave:Connect(function()
                             clearButton.TextColor3 = Color3.fromRGB(178, 178, 178)
                         end)
+
+                        -- Click outside to lose focus
+                        UserInputService.InputBegan:Connect(function(inputObject)
+                            if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
+                                if canType then
+                                    local mousePos = UserInputService:GetMouseLocation()
+                                    local innerAbsPos = inner.AbsolutePosition
+                                    local innerAbsSize = inner.AbsoluteSize
+                                    
+                                    if not (mousePos.X >= innerAbsPos.X and mousePos.X <= innerAbsPos.X + innerAbsSize.X and
+                                        mousePos.Y >= innerAbsPos.Y and mousePos.Y <= innerAbsPos.Y + innerAbsSize.Y) then
+                                        canType = false
+                                        showCursor = false
+                                        updateTextDisplay()
+                                    end
+                                end
+                            end
+                        end)
+
+                        updateTextDisplay()
                     end
 
                     function self.setPosition(position)
