@@ -1,4 +1,4 @@
-print("t2")
+print("t3")
 --[[
 	rbimgui-2
 	version 1.2
@@ -12,7 +12,7 @@ if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
 
-local tzu = Enum.Font.SourceSansBold 
+local tzu = Enum.Font.GothamBold 
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
