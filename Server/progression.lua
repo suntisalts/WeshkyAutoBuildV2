@@ -2,6 +2,11 @@ local HttpService = game:GetService("HttpService")
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 
+local existingGui = game:GetService("CoreGui"):FindFirstChild("progressBar")
+if existingGui then
+    existingGui:Destroy()
+end
+
 local progressionBar = {}
 
 function progressionBar.new()
