@@ -2297,6 +2297,7 @@ local library library = {
                             canType = true
                             showCursor = false
                             self.search("")
+                            displayText.Text = "Search ..."
                             updateTextDisplay()
                         end)
 
