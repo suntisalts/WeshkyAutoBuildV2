@@ -1,4 +1,3 @@
-print("t5")
 --[[
 	rbimgui-2
 	version 1.2
@@ -12,8 +11,9 @@ if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
 
-local tzu = Enum.Font.SourceSansBold 
-local tzu2 = Enum.Font.GothamBold
+local tzu = Enum.Font.SourceSansBold -- All
+local tzu2 = Enum.Font.GothamBold -- Title
+local tzu3 = Enum.Font.GothamSemiBold -- Tabs
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
@@ -303,7 +303,7 @@ do -- Load items
     Title_2.Font = tzu2
     Title_2.Text = "ImGui Demo"
     Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_2.TextSize = 16.000
+    Title_2.TextSize = 12.000
     Title_2.TextWrapped = true
     Title_2.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -1441,7 +1441,7 @@ local library library = {
             local tabbuttons = tabs:FindFirstChild("Items")
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
-            tabbutton.Font = tzu2
+            tabbutton.Font = tzu3
             tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
             tabbutton.MouseButton1Click:Connect(function()
