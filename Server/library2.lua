@@ -2002,7 +2002,7 @@ local library library = {
                     inner.ImageColor3 = dropdownOptions.color
                     outer.SliceScale = dropdownOptions.rounding / 100
                     inner.SliceScale = dropdownOptions.rounding / 100
-                    inner:FindFirstChild("Value").Text = "[...]"
+                    inner:FindFirstChild("Value").Text = "[ ... ]"
 
                     text.Text = dropdownOptions.text
                     dropdownWindow:FindFirstChild("Title").Text = dropdownOptions.text
@@ -2110,8 +2110,8 @@ local library library = {
 
                         function dropdownObject.Destroy()
                             if rawget(dropdownObject, name) then
-                                inner:FindFirstChild("Value").Text = "[...]"
-                                dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = "[...]"
+                                inner:FindFirstChild("Value").Text = "[ ... ]"
+                                dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = "[ ... ]"
                             end
                             self.selected = nil
                             rawset(dropdownObject, name, nil)
