@@ -134,7 +134,7 @@ do -- Load items
     Label.Font = tzu
     Label.Text = "Hello, World!"
     Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Label.TextSize = 14.000
+    Label.TextSize = 13.000
     Label.TextXAlignment = Enum.TextXAlignment.Left
 
     TabButton.Name = "TabButton"
@@ -183,7 +183,7 @@ do -- Load items
     Title.Font = tzu
     Title.Text = "Folder"
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.TextSize = 14.000
+    Title.TextSize = 13.000
     Title.TextXAlignment = Enum.TextXAlignment.Left
 
     Items.Name = "Items"
@@ -389,7 +389,7 @@ do -- Load items
     Button.Font = tzu
     Button.Text = ""
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button.TextSize = 14.000
+    Button.TextSize = 13.000
 
     ImageLabel.Parent = Button
     ImageLabel.Active = true
@@ -439,7 +439,7 @@ do -- Load items
     Text.Font = tzu
     Text.Text = "Switch"
     Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text.TextSize = 14.000
+    Text.TextSize = 13.000
     Text.TextXAlignment = Enum.TextXAlignment.Left
 
     Slider.Name = "Slider"
@@ -486,7 +486,7 @@ do -- Load items
     Value.Font = tzu
     Value.Text = "6.00"
     Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Value.TextSize = 14.000
+    Value.TextSize = 13.000
 
     Text_2.Name = "Text"
     Text_2.Parent = Slider
@@ -497,7 +497,7 @@ do -- Load items
     Text_2.Font = tzu
     Text_2.Text = "Slider"
     Text_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_2.TextSize = 14.000
+    Text_2.TextSize = 13.000
     Text_2.TextXAlignment = Enum.TextXAlignment.Left
 
     Button_2.Name = "Button"
@@ -509,7 +509,7 @@ do -- Load items
     Button_2.ZIndex = 3
     Button_2.Font = tzu
     Button_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button_2.TextSize = 14.000
+    Button_2.TextSize = 13.000
 
     ImageLabel_2.Parent = Button_2
     ImageLabel_2.Active = true
@@ -587,7 +587,7 @@ do -- Load items
     heading.Font = tzu
     heading.Text = "welcome, singularity"
     heading.TextColor3 = Color3.fromRGB(255, 255, 255)
-    heading.TextSize = 14.000
+    heading.TextSize = 13.000
     heading.TextXAlignment = Enum.TextXAlignment.Left
     heading.TextYAlignment = Enum.TextYAlignment.Top
 
@@ -614,7 +614,7 @@ do -- Load items
     SubHeading.Font = tzu
     SubHeading.Text = "subheading"
     SubHeading.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SubHeading.TextSize = 14.000
+    SubHeading.TextSize = 13.000
     SubHeading.TextXAlignment = Enum.TextXAlignment.Left
     SubHeading.TextYAlignment = Enum.TextYAlignment.Top
 
@@ -634,7 +634,7 @@ do -- Load items
     Button_3.Font = tzu
     Button_3.Text = ""
     Button_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button_3.TextSize = 14.000
+    Button_3.TextSize = 13.000
 
     ImageLabel_4.Parent = Button_3
     ImageLabel_4.Active = true
@@ -683,7 +683,7 @@ do -- Load items
     Text_3.Font = tzu
     Text_3.Text = "Color Picker"
     Text_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_3.TextSize = 14.000
+    Text_3.TextSize = 13.000
     Text_3.TextXAlignment = Enum.TextXAlignment.Left
 
     DropdownOption.Name = "DropdownOption"
@@ -696,7 +696,7 @@ do -- Load items
     DropdownOption.Font = tzu
     DropdownOption.Text = "  Option"
     DropdownOption.TextColor3 = Color3.fromRGB(255, 255, 255)
-    DropdownOption.TextSize = 14.000
+    DropdownOption.TextSize = 13.000
     DropdownOption.TextXAlignment = Enum.TextXAlignment.Left
 
     ImageLabel_6.Parent = DropdownOption
@@ -751,7 +751,7 @@ do -- Load items
     Title_3.Font = tzu
     Title_3.Text = "Dropdown"
     Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_3.TextSize = 16.000
+    Title_3.TextSize = 15.000
     Title_3.TextWrapped = true
     Title_3.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -916,7 +916,7 @@ do -- Load items
     Title_4.Font = tzu
     Title_4.Text = "Color Picker"
     Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_4.TextSize = 16.000
+    Title_4.TextSize = 15.000
     Title_4.TextWrapped = true
     Title_4.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -1081,7 +1081,7 @@ do -- Load items
     Value_2.Font = tzu
     Value_2.Text = "Selected"
     Value_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Value_2.TextSize = 14.000
+    Value_2.TextSize = 13.000
     Value_2.TextXAlignment = Enum.TextXAlignment.Left
 
     Text_4.Name = "Text"
@@ -1093,7 +1093,7 @@ do -- Load items
     Text_4.Font = tzu
     Text_4.Text = "Dropdown"
     Text_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_4.TextSize = 14.000
+    Text_4.TextSize = 13.000
     Text_4.TextXAlignment = Enum.TextXAlignment.Left
 
     Cache_2.Name = "Cache"
@@ -1499,6 +1499,7 @@ local library library = {
                     local label = new("Label")
                     label.Parent = items
                     label.Text = labelOptions.text
+                    label.Textsize = 13
                     label.Size = UDim2.new(0, label.TextBounds.X, 0, label.Size.Y.Offset)
                     label.TextColor3 = labelOptions.color
 
