@@ -1499,7 +1499,7 @@ local library library = {
                     local label = new("Label")
                     label.Parent = items
                     label.Text = labelOptions.text
-                    label.Textsize = 13
+                    label.TextSize = 13
                     label.Size = UDim2.new(0, label.TextBounds.X, 0, label.Size.Y.Offset)
                     label.TextColor3 = labelOptions.color
 
