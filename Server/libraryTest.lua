@@ -1,4 +1,3 @@
-print("t3")
 --[[
 	rbimgui-2
 	version 1.2
@@ -12,7 +11,7 @@ if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
 
-local tzu = Enum.Font.GothamBold 
+local tzu = Enum.Font.SourceSansBold 
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
@@ -2079,6 +2078,7 @@ local library library = {
                         local content = dropdownWindow:FindFirstChild("Content")
                         dropdownOption.Parent = dropdownItems
                         dropdownOption.Text = "  " .. name
+                        dropdownOption.Font = tzu
                         dropdownOption.TextColor3 = Color3.fromRGB(178, 178, 178)
                         dropdownOption.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
