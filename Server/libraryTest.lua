@@ -303,7 +303,7 @@ do -- Load items
     Title_2.Font = tzu2
     Title_2.Text = "ImGui Demo"
     Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_2.TextSize = 12.000
+    Title_2.TextSize = 15
     Title_2.TextWrapped = true
     Title_2.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -1442,7 +1442,7 @@ local library library = {
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
             tabbutton.Font = tzu3
-            tabbutton.TextSize = 12
+            tabbutton.TextSize = 14
             tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
             tabbutton.MouseButton1Click:Connect(function()
