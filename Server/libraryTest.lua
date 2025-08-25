@@ -13,7 +13,7 @@ end
 
 local tzu = Enum.Font.SourceSansBold -- All
 local tzu2 = Enum.Font.GothamBold -- Title
-local tzu3 = Enum.Font.GothamSemiBold -- Tabs
+local tzu3 = Enum.Font.GothamBold  -- Tabs
 
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
@@ -1442,6 +1442,7 @@ local library library = {
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
             tabbutton.Font = tzu3
+            tabbutton.TextSize = 12
             tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
             tabbutton.MouseButton1Click:Connect(function()
