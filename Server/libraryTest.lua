@@ -1442,7 +1442,7 @@ local library library = {
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
             tabbutton.Font = tzu3
-            tabbutton.TextSize = 14
+            tabbutton.TextSize = 15
             tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
             tabbutton.MouseButton1Click:Connect(function()
