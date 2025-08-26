@@ -16,8 +16,8 @@ MainPart.Name = "MainPart"
 
 local Window = Instance.new("ImageLabel", MainPart)
 Window.Name = "Window"
-Window.Position = UDim2.new(0, 1115, 0, 40)
-Window.Size = UDim2.new(0, 240, 0, 500)
+Window.Position = UDim2.new(0, 1047, 0, 40)
+Window.Size = UDim2.new(0, 300, 0, 550)
 Window.Image = "rbxassetid://2851926732"
 Window.ImageColor3 = Color3.fromRGB(16, 16, 16)
 Window.ImageTransparency = 0.04
@@ -110,7 +110,6 @@ ClearButton.ZIndex = 99
 local UICorner = Instance.new("UICorner", ClearButton)
 UICorner.CornerRadius = UDim.new(0, 3)
 
--- Template block
 local ExampleBlock = Instance.new("Frame")
 ExampleBlock.Name = "Block"
 ExampleBlock.Size = UDim2.new(1, 0, 0, 40)
