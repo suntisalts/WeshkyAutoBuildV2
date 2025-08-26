@@ -16,7 +16,7 @@ MainPart.Name = "MainPart"
 
 local Window = Instance.new("ImageLabel", MainPart)
 Window.Name = "Window"
-Window.Position = UDim2.new(0, 1200, 0, 40)
+Window.Position = UDim2.new(0, 1180, 0, 40)
 Window.Size = UDim2.new(0, 240, 0, 500)
 Window.Image = "rbxassetid://2851926732"
 Window.ImageColor3 = Color3.fromRGB(16, 16, 16)
