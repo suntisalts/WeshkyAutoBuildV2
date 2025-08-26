@@ -11,6 +11,10 @@ if game:GetService("CoreGui"):FindFirstChild("imgui2") then
     game:GetService("CoreGui"):FindFirstChild("imgui2"):Destroy()
 end
 
+local tzu = Enum.Font.GothamBold -- All
+local tzu2 = Enum.Font.GothamBold -- Title
+local tzu3 = Enum.Font.GothamBold  -- Tabs
+
 do -- Load items
     local imgui2 = Instance.new("ScreenGui")
     local Presets = Instance.new("Frame")
@@ -127,10 +131,10 @@ do -- Load items
     Label.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Label.BackgroundTransparency = 1.000
     Label.Size = UDim2.new(0, 91, 0, 15)
-    Label.Font = Enum.Font.Code
+    Label.Font = tzu
     Label.Text = "Hello, World!"
     Label.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Label.TextSize = 14.000
+    Label.TextSize = 13.000
     Label.TextXAlignment = Enum.TextXAlignment.Left
 
     TabButton.Name = "TabButton"
@@ -138,7 +142,7 @@ do -- Load items
     TabButton.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     TabButton.BackgroundTransparency = 1.000
     TabButton.Size = UDim2.new(0, 32, 1, 0)
-    TabButton.Font = Enum.Font.Code
+    TabButton.Font = tzu
     TabButton.Text = "Menu"
     TabButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     TabButton.TextSize = 16.000
@@ -176,10 +180,10 @@ do -- Load items
     Title.BackgroundTransparency = 1.000
     Title.Position = UDim2.new(0, 30, 0, 0)
     Title.Size = UDim2.new(1, -30, 1, 0)
-    Title.Font = Enum.Font.Code
+    Title.Font = tzu
     Title.Text = "Folder"
     Title.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title.TextSize = 14.000
+    Title.TextSize = 13.000
     Title.TextXAlignment = Enum.TextXAlignment.Left
 
     Items.Name = "Items"
@@ -296,10 +300,10 @@ do -- Load items
     Title_2.Position = UDim2.new(0, 30, 0, 0)
     Title_2.Size = UDim2.new(1, -30, 1, 0)
     Title_2.ZIndex = 4
-    Title_2.Font = Enum.Font.Code
+    Title_2.Font = tzu2
     Title_2.Text = "ImGui Demo"
     Title_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_2.TextSize = 16.000
+    Title_2.TextSize = 15
     Title_2.TextWrapped = true
     Title_2.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -382,10 +386,10 @@ do -- Load items
     Button.BorderSizePixel = 0
     Button.Size = UDim2.new(0, 20, 0, 20)
     Button.ZIndex = 3
-    Button.Font = Enum.Font.Code
+    Button.Font = tzu
     Button.Text = ""
     Button.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button.TextSize = 14.000
+    Button.TextSize = 13.000
 
     ImageLabel.Parent = Button
     ImageLabel.Active = true
@@ -432,10 +436,10 @@ do -- Load items
     Text.BackgroundTransparency = 1.000
     Text.Position = UDim2.new(0, 28, 0, 0)
     Text.Size = UDim2.new(0, 42, 1, 0)
-    Text.Font = Enum.Font.Code
+    Text.Font = tzu
     Text.Text = "Switch"
     Text.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text.TextSize = 14.000
+    Text.TextSize = 13.000
     Text.TextXAlignment = Enum.TextXAlignment.Left
 
     Slider.Name = "Slider"
@@ -479,10 +483,10 @@ do -- Load items
     Value.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     Value.BackgroundTransparency = 1.000
     Value.Size = UDim2.new(1, 0, 1, 0)
-    Value.Font = Enum.Font.Code
+    Value.Font = tzu
     Value.Text = "6.00"
     Value.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Value.TextSize = 14.000
+    Value.TextSize = 13.000
 
     Text_2.Name = "Text"
     Text_2.Parent = Slider
@@ -490,10 +494,10 @@ do -- Load items
     Text_2.BackgroundTransparency = 1.000
     Text_2.Position = UDim2.new(0, 158, 0, 0)
     Text_2.Size = UDim2.new(0, 42, 1, 0)
-    Text_2.Font = Enum.Font.Code
+    Text_2.Font = tzu
     Text_2.Text = "Slider"
     Text_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_2.TextSize = 14.000
+    Text_2.TextSize = 13.000
     Text_2.TextXAlignment = Enum.TextXAlignment.Left
 
     Button_2.Name = "Button"
@@ -503,9 +507,9 @@ do -- Load items
     Button_2.BorderSizePixel = 0
     Button_2.Size = UDim2.new(0, 72, 0, 20)
     Button_2.ZIndex = 3
-    Button_2.Font = Enum.Font.Code
+    Button_2.Font = tzu
     Button_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button_2.TextSize = 14.000
+    Button_2.TextSize = 13.000
 
     ImageLabel_2.Parent = Button_2
     ImageLabel_2.Active = true
@@ -580,10 +584,10 @@ do -- Load items
     heading.Position = UDim2.new(0, 100, 0, 24)
     heading.Size = UDim2.new(1, -100, 0, 50)
     heading.ZIndex = 3
-    heading.Font = Enum.Font.GothamBlack
+    heading.Font = tzu
     heading.Text = "welcome, singularity"
     heading.TextColor3 = Color3.fromRGB(255, 255, 255)
-    heading.TextSize = 14.000
+    heading.TextSize = 13.000
     heading.TextXAlignment = Enum.TextXAlignment.Left
     heading.TextYAlignment = Enum.TextYAlignment.Top
 
@@ -607,10 +611,10 @@ do -- Load items
     SubHeading.Position = UDim2.new(0, 100, 0, 44)
     SubHeading.Size = UDim2.new(1, -100, 0, 50)
     SubHeading.ZIndex = 3
-    SubHeading.Font = Enum.Font.Gotham
+    SubHeading.Font = tzu
     SubHeading.Text = "subheading"
     SubHeading.TextColor3 = Color3.fromRGB(255, 255, 255)
-    SubHeading.TextSize = 14.000
+    SubHeading.TextSize = 13.000
     SubHeading.TextXAlignment = Enum.TextXAlignment.Left
     SubHeading.TextYAlignment = Enum.TextYAlignment.Top
 
@@ -627,10 +631,10 @@ do -- Load items
     Button_3.BorderSizePixel = 0
     Button_3.Size = UDim2.new(0, 20, 0, 20)
     Button_3.ZIndex = 3
-    Button_3.Font = Enum.Font.Code
+    Button_3.Font = tzu
     Button_3.Text = ""
     Button_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Button_3.TextSize = 14.000
+    Button_3.TextSize = 13.000
 
     ImageLabel_4.Parent = Button_3
     ImageLabel_4.Active = true
@@ -676,10 +680,10 @@ do -- Load items
     Text_3.BackgroundTransparency = 1.000
     Text_3.Position = UDim2.new(0, 28, 0, 0)
     Text_3.Size = UDim2.new(0, 84, 1, 0)
-    Text_3.Font = Enum.Font.Code
+    Text_3.Font = tzu
     Text_3.Text = "Color Picker"
     Text_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_3.TextSize = 14.000
+    Text_3.TextSize = 13.000
     Text_3.TextXAlignment = Enum.TextXAlignment.Left
 
     DropdownOption.Name = "DropdownOption"
@@ -689,10 +693,10 @@ do -- Load items
     DropdownOption.BorderSizePixel = 0
     DropdownOption.Size = UDim2.new(1, 0, 0, 20)
     DropdownOption.ZIndex = 3
-    DropdownOption.Font = Enum.Font.Code
+    DropdownOption.Font = tzu
     DropdownOption.Text = "  Option"
     DropdownOption.TextColor3 = Color3.fromRGB(255, 255, 255)
-    DropdownOption.TextSize = 14.000
+    DropdownOption.TextSize = 13.000
     DropdownOption.TextXAlignment = Enum.TextXAlignment.Left
 
     ImageLabel_6.Parent = DropdownOption
@@ -744,10 +748,10 @@ do -- Load items
     Title_3.Position = UDim2.new(0, 30, 0, 0)
     Title_3.Size = UDim2.new(1, -30, 1, 0)
     Title_3.ZIndex = 4
-    Title_3.Font = Enum.Font.Code
+    Title_3.Font = tzu
     Title_3.Text = "Dropdown"
     Title_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_3.TextSize = 16.000
+    Title_3.TextSize = 15.000
     Title_3.TextWrapped = true
     Title_3.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -841,7 +845,7 @@ do -- Load items
     TextBox.BackgroundTransparency = 1.000
     TextBox.Position = UDim2.new(0, 30, 0, 0)
     TextBox.Size = UDim2.new(1, -30, 1, 0)
-    TextBox.Font = Enum.Font.SourceSans
+    TextBox.Font = tzu
     TextBox.Text = "Search ..."
     TextBox.TextColor3 = Color3.fromRGB(178, 178, 178)
     TextBox.TextSize = 14.000
@@ -853,7 +857,7 @@ do -- Load items
     Selected.BackgroundTransparency = 1.000
     Selected.Position = UDim2.new(0, 10, 1, -30)
     Selected.Size = UDim2.new(1, -10, 0, 30)
-    Selected.Font = Enum.Font.Code
+    Selected.Font = tzu
     Selected.Text = "Selected: [...]"
     Selected.TextColor3 = Color3.fromRGB(178, 178, 178)
     Selected.TextSize = 12.000
@@ -909,10 +913,10 @@ do -- Load items
     Title_4.Position = UDim2.new(0, 30, 0, 0)
     Title_4.Size = UDim2.new(1, -30, 1, 0)
     Title_4.ZIndex = 4
-    Title_4.Font = Enum.Font.Code
+    Title_4.Font = tzu
     Title_4.Text = "Color Picker"
     Title_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Title_4.TextSize = 16.000
+    Title_4.TextSize = 15.000
     Title_4.TextWrapped = true
     Title_4.TextXAlignment = Enum.TextXAlignment.Left
 
@@ -1033,7 +1037,7 @@ do -- Load items
     TextLabel.BackgroundTransparency = 1.000
     TextLabel.Position = UDim2.new(0, 10, 1, -35)
     TextLabel.Size = UDim2.new(1, -10, 0, 35)
-    TextLabel.Font = Enum.Font.Code
+    TextLabel.Font = tzu
     TextLabel.Text = "Selected:"
     TextLabel.TextColor3 = Color3.fromRGB(178, 178, 178)
     TextLabel.TextSize = 12.000
@@ -1074,10 +1078,10 @@ do -- Load items
     Value_2.BackgroundTransparency = 1.000
     Value_2.Position = UDim2.new(0, 10, 0, 0)
     Value_2.Size = UDim2.new(1, -10, 1, 0)
-    Value_2.Font = Enum.Font.Code
+    Value_2.Font = tzu
     Value_2.Text = "Selected"
     Value_2.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Value_2.TextSize = 14.000
+    Value_2.TextSize = 13.000
     Value_2.TextXAlignment = Enum.TextXAlignment.Left
 
     Text_4.Name = "Text"
@@ -1086,10 +1090,10 @@ do -- Load items
     Text_4.BackgroundTransparency = 1.000
     Text_4.Position = UDim2.new(0, 158, 0, 0)
     Text_4.Size = UDim2.new(0, 56, 1, 0)
-    Text_4.Font = Enum.Font.Code
+    Text_4.Font = tzu
     Text_4.Text = "Dropdown"
     Text_4.TextColor3 = Color3.fromRGB(255, 255, 255)
-    Text_4.TextSize = 14.000
+    Text_4.TextSize = 13.000
     Text_4.TextXAlignment = Enum.TextXAlignment.Left
 
     Cache_2.Name = "Cache"
@@ -1437,6 +1441,8 @@ local library library = {
             local tabbuttons = tabs:FindFirstChild("Items")
             tabbutton.Parent = tabbuttons
             tabbutton.Text = tabOptions.text
+            tabbutton.Font = tzu3
+            tabbutton.TextSize = 15
             tabbutton.Size = UDim2.new(0, tabbutton.TextBounds.X, 1, 0)
             tabbutton.TextColor3 = Color3.new(0.4, 0.4, 0.4)
             tabbutton.MouseButton1Click:Connect(function()
@@ -1493,6 +1499,7 @@ local library library = {
                     local label = new("Label")
                     label.Parent = items
                     label.Text = labelOptions.text
+                    label.TextSize = 13
                     label.Size = UDim2.new(0, label.TextBounds.X, 0, label.Size.Y.Offset)
                     label.TextColor3 = labelOptions.color
 
@@ -1995,7 +2002,7 @@ local library library = {
                     inner.ImageColor3 = dropdownOptions.color
                     outer.SliceScale = dropdownOptions.rounding / 100
                     inner.SliceScale = dropdownOptions.rounding / 100
-                    inner:FindFirstChild("Value").Text = "[...]"
+                    inner:FindFirstChild("Value").Text = "[ ... ]"
 
                     text.Text = dropdownOptions.text
                     dropdownWindow:FindFirstChild("Title").Text = dropdownOptions.text
@@ -2076,6 +2083,7 @@ local library library = {
                         local content = dropdownWindow:FindFirstChild("Content")
                         dropdownOption.Parent = dropdownItems
                         dropdownOption.Text = "  " .. name
+                        dropdownOption.Font = tzu
                         dropdownOption.TextColor3 = Color3.fromRGB(178, 178, 178)
                         dropdownOption.MouseButton1Click:Connect(function()
                             if findBrowsingTopMost() == dropdownWindow then
@@ -2102,8 +2110,8 @@ local library library = {
 
                         function dropdownObject.Destroy()
                             if rawget(dropdownObject, name) then
-                                inner:FindFirstChild("Value").Text = "[...]"
-                                dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = "[...]"
+                                inner:FindFirstChild("Value").Text = "[ ... ]"
+                                dropdownWindow:FindFirstChild("Content"):FindFirstChild("Selected").Text = "[ ... ]"
                             end
                             self.selected = nil
                             rawset(dropdownObject, name, nil)
