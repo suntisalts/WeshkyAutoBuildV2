@@ -1,6 +1,6 @@
 do
-	local MainPart = game:GetService("CoreGui"):FindFirstChild("MainPart")
-	if MainPart then MainPart:Destroy() end
+	local DiscordUi = game:GetService("CoreGui"):FindFirstChild("DiscordUi")
+	if DiscordUi then DiscordUi:Destroy() end
 end
 
 local DiscordUi = Instance.new("ScreenGui")
